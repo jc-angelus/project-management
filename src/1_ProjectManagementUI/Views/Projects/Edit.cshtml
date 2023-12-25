@@ -1,0 +1,56 @@
+﻿@model ProjectManagementDomain.Models.ProjectsModel
+
+@{
+    ViewData["Title"] = "Hotel Edit";
+    Layout = "_LayoutNew";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Hotel Form<small></small></h3>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form asp-action="Edit" asp-id="quickForm" id="quickForm">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StatesId" class="control-label">State</label>
+                        <select id="drpHotelList" class="form-control" asp-for="StatesId" asp-items="@(new SelectList(Model.StatesList, "Value", "Text"))">
+                            <option value="">--Select--</option>
+                        </select>
+                        <span asp-validation-for="StatesId" class="text-danger"></span>
+                        <input type="hidden" asp-for="StatesId" />
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <a asp-action="Index" class="btn btn-primary back-button">Back</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

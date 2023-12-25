@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProjectManagementDomain.Models.TasksModel>
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "_LayoutNew";
+}
+
+<section class="content container-fluid">    
+    <p class="create-button">
+        <a href="/task/create" type="button" class="btn btn-primary">Create</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    State
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatesModel.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |                        
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
